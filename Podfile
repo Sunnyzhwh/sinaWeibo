@@ -6,5 +6,5 @@ target 'sinaWeibo' do
 
 pod 'Alamofire'
 pod 'Kingfisher'
-
+pod 'SnapKit'
 end

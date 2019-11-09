@@ -19,14 +19,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(UserAccountViewModel.sharedUserAccount)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = defaultRootViewController
         window?.makeKeyAndVisible()
+        print(isNewVersion)
+        // MARK: 监听通知 需要扩展notification.name为自定义通知名
+        NotificationCenter.default.addObserver(
+            forName: WBSwitchRootViewControllerNotification,
+            object: nil,                                            //nil--监听任何对象
+            queue: nil                                              //nil为主线程
+            ) { [weak self] (notification) in
+                print(notification)
+                self?.window?.rootViewController = MainViewController()
+        }
+        
         return true
+    }
+    // MARK: 注销通知
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: WBSwitchRootViewControllerNotification, object: nil)
     }
     
     private func setupAppearance() {
-        UINavigationBar.appearance().tintColor = UIColor.orange
-        UITabBar.appearance().tintColor = UIColor.orange
+        UINavigationBar.appearance().tintColor = WBApprearanceTintColor
+        UITabBar.appearance().tintColor = WBApprearanceTintColor
     }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -52,4 +67,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
+extension AppDelegate {
+    /// 程序启动时根视图控制器
+    private var defaultRootViewController: UIViewController {
+        // 1.判断是否登录
+        if UserAccountViewModel.sharedUserAccount.userLogon {
+            return isNewVersion ? NewfeatureViewController() : WelcomeViewController()
+        }
+        // 2.没有登录返回主控制器
+        return MainViewController()
+    }
+    
+    private var isNewVersion: Bool {
+//        print(Bundle.main.infoDictionary ?? "--")
+        // MARK: 获取当前版本号
+        let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let version = Double(currentVersion)!
+        print("当前版本 \(version)")
+        // MARK: 获取之前版本号
+        let sandBoxVersionKey = "sandBoxVersionKey"
+        let sandVersion = UserDefaults.standard.double(forKey: sandBoxVersionKey)
+        print("之前版本 \(sandVersion)")
+        // MARK: 保存当前版本号到用户设置
+        UserDefaults.standard.set(version, forKey: sandBoxVersionKey)
+        return version > sandVersion
+    }
+}
+//CFBundleShortVersionString plist文件的版本号键名

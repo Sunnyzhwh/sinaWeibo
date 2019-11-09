@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		A32857FC23757975009E113E /* NetWorkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32857FB23757975009E113E /* NetWorkTools.swift */; };
 		A351360D2376A9A100ACEF3C /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351360C2376A9A100ACEF3C /* UserAccountViewModel.swift */; };
+		A351360F2376F2BA00ACEF3C /* NewfeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */; };
+		A35136112377408500ACEF3C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35136102377408500ACEF3C /* WelcomeViewController.swift */; };
+		A351361323776A4000ACEF3C /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351361223776A4000ACEF3C /* Common.swift */; };
 		A3F619C7237598080096E1F4 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F619C6237598080096E1F4 /* OAuthViewController.swift */; };
 		A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F619C82375D7D10096E1F4 /* UserAccountModel.swift */; };
 		A3FD8BB1236FEAD8007BA6C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD8BB0236FEAD8007BA6C8 /* AppDelegate.swift */; };
@@ -30,6 +33,9 @@
 		8BD8A04F6CBD3843374C2978 /* Pods-sinaWeibo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sinaWeibo.release.xcconfig"; path = "Target Support Files/Pods-sinaWeibo/Pods-sinaWeibo.release.xcconfig"; sourceTree = "<group>"; };
 		A32857FB23757975009E113E /* NetWorkTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkTools.swift; sourceTree = "<group>"; };
 		A351360C2376A9A100ACEF3C /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
+		A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewfeatureViewController.swift; sourceTree = "<group>"; };
+		A35136102377408500ACEF3C /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A351361223776A4000ACEF3C /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		A3F619C6237598080096E1F4 /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		A3F619C82375D7D10096E1F4 /* UserAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountModel.swift; sourceTree = "<group>"; };
 		A3FD8BAD236FEAD8007BA6C8 /* sinaWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sinaWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +189,8 @@
 				A3FD8BCB236FF37C007BA6C8 /* MainViewController.swift */,
 				A3FD8BD923701BD6007BA6C8 /* VisitorTableViewController.swift */,
 				A3FD8BDB23701FF2007BA6C8 /* VisitorView.swift */,
+				A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */,
+				A35136102377408500ACEF3C /* WelcomeViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 			children = (
 				A3FD8BD623701017007BA6C8 /* Extension */,
 				A32857FB23757975009E113E /* NetWorkTools.swift */,
+				A351361223776A4000ACEF3C /* Common.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -327,7 +336,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A351361323776A4000ACEF3C /* Common.swift in Sources */,
 				A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */,
+				A35136112377408500ACEF3C /* WelcomeViewController.swift in Sources */,
+				A351360F2376F2BA00ACEF3C /* NewfeatureViewController.swift in Sources */,
 				A3FD8BD4236FF401007BA6C8 /* ProfileTableViewController.swift in Sources */,
 				A3FD8BCE236FF3D5007BA6C8 /* HomeTableViewController.swift in Sources */,
 				A3FD8BD823701077007BA6C8 /* UIbutton+Extension.swift in Sources */,

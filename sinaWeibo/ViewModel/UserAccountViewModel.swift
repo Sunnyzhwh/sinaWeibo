@@ -20,6 +20,9 @@ class UserAccountViewModel {
     var userLogon: Bool {
         return account?.access_token != nil && !isExpeired
     }
+    var avatarUrl: URL? {
+        return URL(string: account?.avatar_large ?? "")
+    }
     private var fileUrl: URL? {
         return try? FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("userInfo.plist")
     }
