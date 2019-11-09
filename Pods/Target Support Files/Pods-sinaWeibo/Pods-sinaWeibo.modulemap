@@ -1,0 +1,6 @@
+framework module Pods_sinaWeibo {
+  umbrella header "Pods-sinaWeibo-umbrella.h"
+
+  export *
+  module * { export * }
+}

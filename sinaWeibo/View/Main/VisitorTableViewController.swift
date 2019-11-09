@@ -10,15 +10,15 @@ import UIKit
 
 class VisitorTableViewController: UITableViewController {
 
-    private var userLogon = false
+    private var userLogon = UserAccountViewModel.sharedUserAccount.userLogon
     var visitorView: VisitorView?
     override func loadView() {
-        print("visitor")
+        
         userLogon ? super.loadView() : setupVisitorView()
     }
     private func setupVisitorView() {
         visitorView = VisitorView()
-        
+        print("visitor")
         view = visitorView
         visitorView?.registerButtion.addTarget(self, action: #selector(visitorDidReg), for: .touchUpInside)
         visitorView?.loginButtion.addTarget(self, action: #selector(visitorDidLogin), for: .touchUpInside)
@@ -34,6 +34,9 @@ extension VisitorTableViewController {
     
     @objc func visitorDidLogin() {
         print("登录")
+        let vc = OAuthViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
     }
     
     
