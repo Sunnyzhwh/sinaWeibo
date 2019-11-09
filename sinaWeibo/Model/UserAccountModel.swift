@@ -21,17 +21,17 @@ class UserAccountModel: NSObject, Codable {
     @objc var uid: String?
     var screen_name: String?
     var avatar_large: String?
-    var json: Data? {
-        return try? JSONEncoder().encode(self)
+    var plist: Data? {
+        return try? PropertyListEncoder().encode(self)
     }
 
     init(dict: [String : Any]) {
         super.init()
         setValuesForKeys(dict)
     }
-    init?(json: Data) {
+    init?(plist: Data) {
         super.init()
-        if let newValue = try? JSONDecoder().decode(UserAccountModel.self, from: json) {
+        if let newValue = try? PropertyListDecoder().decode(UserAccountModel.self, from: plist) {
             self.access_token = newValue.access_token
             self.expires_in = newValue.expires_in
             self.expiresDate = newValue.expiresDate

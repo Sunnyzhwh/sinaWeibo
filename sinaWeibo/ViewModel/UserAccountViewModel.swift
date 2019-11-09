@@ -21,7 +21,7 @@ class UserAccountViewModel {
         return account?.access_token != nil && !isExpeired
     }
     private var fileUrl: URL? {
-        return try? FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("userInfo.json")
+        return try? FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("userInfo.plist")
     }
     private var isExpeired: Bool {
         if account?.expiresDate?.compare(Date()) == ComparisonResult.orderedDescending {
@@ -30,8 +30,8 @@ class UserAccountViewModel {
         return true
     }
     private init() {
-        if let jsonData = try? Data(contentsOf: fileUrl!) {
-            account = UserAccountModel(json: jsonData)
+        if let plistData = try? Data(contentsOf: fileUrl!) {
+            account = UserAccountModel(plist: plistData)
         }
 //        判断口令过期测试语句
 //        account?.expiresDate = Date(timeIntervalSinceNow: -3000)
@@ -60,9 +60,9 @@ extension UserAccountViewModel {
                 account.avatar_large = dict["avatar_large"] as? String
                 print(account.screen_name!)
                 print(account.avatar_large!)
-                if let json = account.json {
+                if let plistData = account.plist {
                     do {
-                        try json.write(to: self.fileUrl!)
+                        try plistData.write(to: self.fileUrl!)
                         print("保存成功\(self.fileUrl!)")
                     }catch let error {
                         print("不能保存\(error)")
