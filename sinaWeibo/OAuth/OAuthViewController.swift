@@ -8,12 +8,14 @@
 
 import UIKit
 import WebKit
+import SVProgressHUD
 class OAuthViewController: UIViewController {
     
     
     private lazy var webView = WKWebView()
     
     @objc func close() {
+        SVProgressHUD.dismiss()
         dismiss(animated: true, completion: nil)
     }
     
@@ -48,17 +50,31 @@ extension OAuthViewController: WKNavigationDelegate {
                 let code = String(query["code=".endIndex...])
                 print("用户授权")
                 print("授权码是\(code)")
-                UserAccountViewModel.sharedUserAccount.loadAccessToken(code: code)
+                UserAccountViewModel.sharedUserAccount.loadAccessToken(code: code) {
+                    //先关闭当前授权页面，完成后发送通知
+                    self.dismiss(animated: false){
+                        SVProgressHUD.dismiss()
+                        //通知中心是同步的，一旦发送通知，会先执行监听方法，执行结束后才执行后续代码
+                        NotificationCenter.default.post(name: WBSwitchRootViewControllerNotification, object: "welcome")
+                        print("跳转回欢迎界面")
+                    }
+                    
+                }
             }else {
                 print("取消授权")
+                close()
             }
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
         }
     }
-    
-
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        SVProgressHUD.show()
+    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        SVProgressHUD.dismiss()
+    }
 
 }
 

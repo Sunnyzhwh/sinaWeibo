@@ -46,16 +46,17 @@ class UserAccountViewModel {
     }
 }
 extension UserAccountViewModel {
-    func loadAccessToken(code: String) {
+    func loadAccessToken(code: String, finished: @escaping () -> ()) {
         NetWorkTools.sharedTools.loadAccessToken(code: code) { result in
             print(result)
+            
             self.account = UserAccountModel(dict: result as! [String : Any])
 //            print(self.account!)
 //            print(self.account!.expiresDate!)
-            self.loadUserInfo(account: self.account!)
+            self.loadUserInfo(account: self.account!, finished: finished)
         }
     }
-    private func loadUserInfo(account: UserAccountModel) {
+    private func loadUserInfo(account: UserAccountModel, finished: @escaping () -> ()) {
         NetWorkTools.sharedTools.loadUserInfo(uid: account.uid!) { (result) in
 //            print(result)
             if let dict = result as? [String : Any] {
@@ -67,6 +68,7 @@ extension UserAccountViewModel {
                     do {
                         try plistData.write(to: self.fileUrl!)
                         print("保存成功\(self.fileUrl!)")
+                        finished()
                     }catch let error {
                         print("不能保存\(error)")
                     }

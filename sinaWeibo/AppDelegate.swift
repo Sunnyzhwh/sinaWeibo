@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.white
         window?.rootViewController = defaultRootViewController
         window?.makeKeyAndVisible()
-        print(isNewVersion)
+//        print(isNewVersion)
         // MARK: 监听通知 需要扩展notification.name为自定义通知名
         NotificationCenter.default.addObserver(
             forName: WBSwitchRootViewControllerNotification,
@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             queue: nil                                              //nil为主线程
             ) { [weak self] (notification) in
                 print(notification)
-                self?.window?.rootViewController = MainViewController()
+                let vc = notification.object != nil ? WelcomeViewController() : MainViewController()
+                self?.window?.rootViewController = vc
         }
         
         return true

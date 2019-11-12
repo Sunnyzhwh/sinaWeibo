@@ -30,6 +30,11 @@ class NewfeatureViewController: UICollectionViewController {
     
     private lazy var pageControll: UIPageControl = {
         let pc = UIPageControl()
+        pc.numberOfPages = 4
+        pc.backgroundColor = UIColor.darkGray.withAlphaComponent(0.0)
+        pc.pageIndicatorTintColor = UIColor.lightGray
+        pc.currentPageIndicatorTintColor = UIColor.orange
+
         return pc
     }()
     override func viewDidLoad() {
@@ -40,9 +45,23 @@ class NewfeatureViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.register(NewFeatureCell.self, forCellWithReuseIdentifier: WBNewfeatureViewCellId)
-
+        collectionView.addSubview(pageControll)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        collectionView.bringSubviewToFront(pageControll)
+        pageControll.snp.makeConstraints { (make) in
+            make.centerX.equalTo(view.snp.centerX)
+            make.centerY.equalTo(view.snp.bottom).multipliedBy(0.95)
+            make.width.equalTo(70)
+            make.height.equalTo(20)
+        }
+        pageControll.layer.cornerRadius = 10
+        pageControll.layer.masksToBounds = true
+    }
+
     // MARK: 设置状态栏的隐藏
     override var prefersStatusBarHidden: Bool {
         return true
@@ -72,10 +91,15 @@ class NewfeatureViewController: UICollectionViewController {
         
         
     }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = Int((scrollView.contentOffset.x + scrollView.bounds.width / 2) / scrollView.bounds.width)
+        pageControll.currentPage = page
+    }
 }
 
 // MARK: 新特性cell
 private class NewFeatureCell: UICollectionViewCell {
+    
     fileprivate var imageIndex: Int = 0 {
         didSet{
             iconView.image = UIImage(named: "new_feature_\(imageIndex + 1)")
@@ -104,20 +128,21 @@ private class NewFeatureCell: UICollectionViewCell {
         }
         startButton.isUserInteractionEnabled = false
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+        
     }
 
     fileprivate func showButtonAnimated() {
         startButton.isHidden = false
         startButton.transform = __CGAffineTransformMake(0, 0, 0, 0, 0, 0)
-        UIView.animate(withDuration: 1.6,
+        UIView.animate(withDuration: 1.2,
                        delay: 0,
-                       usingSpringWithDamping: 0.8,
+                       usingSpringWithDamping: 0.9,
                        initialSpringVelocity: 10,
                        options: [],
                        animations: {
                         self.startButton.transform = CGAffineTransform.identity
         }) { (_) in
-            print("ok")
+            print("按钮动画完成ok")
             self.startButton.isUserInteractionEnabled = true
         }
     }

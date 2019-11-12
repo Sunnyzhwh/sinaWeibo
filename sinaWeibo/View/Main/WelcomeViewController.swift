@@ -54,7 +54,7 @@ class WelcomeViewController: UIViewController {
             update.bottom.equalTo(view.snp.bottom).offset(-view.bounds.height + 200)
         }
         welcomeLabel.alpha = 0
-        UIView.animate(withDuration: 1.0,
+        UIView.animate(withDuration: 1.2,
                        delay: 0,
                        usingSpringWithDamping: 0.9,
                        initialSpringVelocity: 10,
@@ -65,12 +65,14 @@ class WelcomeViewController: UIViewController {
             UIView.animate(withDuration: 0.5,
                            animations: {
                             self.welcomeLabel.alpha = 1
-            }, completion: { (_) in
-                print("ok")
+            }) { (_) in
+                print("用户头像动画完成ok！")
                 // 不推荐的写法
 //                UIApplication.shared.keyWindow?.rootViewController = MainViewController()
-                NotificationCenter.default.post(name: WBSwitchRootViewControllerNotification, object: nil)
-            })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    NotificationCenter.default.post(name: WBSwitchRootViewControllerNotification, object: nil)
+                }
+            }
         }
     }
     private lazy var backImageView: UIImageView = UIImageView(image: UIImage(named: "ad_background"))

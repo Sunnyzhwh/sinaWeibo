@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SVProgressHUD
 class NetWorkTools {
     private let appKey = "4281004451"
     private let appSecret = "922e80541cd019fc85f72306aa9b7324"
@@ -63,6 +64,7 @@ extension NetWorkTools {
         Alamofire.request(url, method: amethod, parameters: parameters).responseJSON { (response) in
             guard let result = response.result.value else {
                 print(response.result.error ?? "---")
+                SVProgressHUD.showInfo(withStatus: "您的网络不给力！")
                 return }
             finished(result)
         }
