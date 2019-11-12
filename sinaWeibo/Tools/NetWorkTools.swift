@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SVProgressHUD
+
 class NetWorkTools {
     private let appKey = "4281004451"
     private let appSecret = "922e80541cd019fc85f72306aa9b7324"
@@ -34,6 +34,19 @@ class NetWorkTools {
         requestData(url: url, amethod: .post, parameters: parameters, finished: finished)
     }
     
+}
+// MARK: 加载微博相关数据
+extension NetWorkTools {
+    /// 加载授权用户的最新微博
+    /// -see[https://open.weibo.com/wiki/2/statuses/home_timeline](https://open.weibo.com/wiki/2/statuses/home_timeline)
+    func fetchStatus(finished: @escaping (_ result: Any) -> ()) {
+        let url = "https://api.weibo.com/2/statuses/home_timeline.json"
+        guard let parameters = tokenDict else {
+            print("token无效")
+            return
+        }
+        requestData(url: url, amethod: .get, parameters: parameters, finished: finished)
+    }
 }
 extension NetWorkTools {
     /// -see[https://open.weibo.com/wiki/2/users/show](https://open.weibo.com/wiki/2/users/show)
@@ -64,7 +77,6 @@ extension NetWorkTools {
         Alamofire.request(url, method: amethod, parameters: parameters).responseJSON { (response) in
             guard let result = response.result.value else {
                 print(response.result.error ?? "---")
-                SVProgressHUD.showInfo(withStatus: "您的网络不给力！")
                 return }
             finished(result)
         }
@@ -73,4 +85,4 @@ extension NetWorkTools {
 
 
 // https://api.weibo.com/oauth2/authorize?client_id=4281004451&redirect_uri=http://www.baidu.com
-//https://api.weibo.com/2/statuses/home_timeline.json?access_token=2.00Vp5LyCtoeifE65099b3ed2GVEK_C
+//https://api.weibo.com/2/statuses/home_timeline.json?access_token=2.00Vp5LyCtoeifE981326f6c7GSuL2D

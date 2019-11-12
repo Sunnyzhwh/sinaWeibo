@@ -19,11 +19,19 @@ extension UIButton {
         // 根据背景图片设置大小
         sizeToFit()
     }
-    convenience init(title: String, color: UIColor, imageName: String) {
+    convenience init(title: String, color: UIColor, backgroundImageName: String) {
         self.init()
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
-        setBackgroundImage(UIImage(named: imageName), for: .normal)
+        setBackgroundImage(UIImage(named: backgroundImageName), for: .normal)
+        sizeToFit()
+    }
+    convenience init(title: String, fontSize: CGFloat,color: UIColor, imageName: String) {
+        self.init()
+        setTitle(title, for: .normal)
+        setTitleColor(color, for: .normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
+        setImage(UIImage(named: imageName), for: .normal)
         sizeToFit()
     }
 }

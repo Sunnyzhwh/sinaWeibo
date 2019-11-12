@@ -147,5 +147,5 @@ private class NewFeatureCell: UICollectionViewCell {
         }
     }
     private lazy var iconView = UIImageView()
-    private lazy var startButton = UIButton(title: "开始体验", color: UIColor.white, imageName: "new_feature_finish_button")
+    private lazy var startButton = UIButton(title: "开始体验", color: UIColor.white, backgroundImageName: "new_feature_finish_button")
 }

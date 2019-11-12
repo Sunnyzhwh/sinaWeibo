@@ -17,24 +17,25 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let processor = DownsamplingImageProcessor(size: iconView.frame.size)
-            >> RoundCornerImageProcessor(cornerRadius: 20)
-        iconView.kf.setImage(with: UserAccountViewModel.sharedUserAccount.avatarUrl, placeholder: UIImage(named: "placeholderImage"),
-                             options: [
-                                .processor(processor),
-                                .scaleFactor(UIScreen.main.scale),
-                                .transition(.fade(1)),
-                                .cacheOriginalImage
-            ])
-        {
-            result in
-            switch result {
-            case .success(let value):
-                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-            case .failure(let error):
-                print("Job failed: \(error.localizedDescription)")
-            }
-        }
+//        let processor = DownsamplingImageProcessor(size: iconView.frame.size)
+//            >> RoundCornerImageProcessor(cornerRadius: 20)
+//        iconView.kf.setImage(with: UserAccountViewModel.sharedUserAccount.avatarUrl, placeholder: UIImage(named: "placeholderImage"),
+//                             options: [
+//                                .processor(processor),
+//                                .scaleFactor(UIScreen.main.scale),
+//                                .transition(.fade(1)),
+//                                .cacheOriginalImage
+//            ])
+//        {
+//            result in
+//            switch result {
+//            case .success(let value):
+//                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+//            case .failure(let error):
+//                print("Job failed: \(error.localizedDescription)")
+//            }
+//        }
+        iconView.kf.setImage(with: UserAccountViewModel.sharedUserAccount.avatarUrl, placeholder: UIImage(named: "placeholderImage"))
         setupUI()
     }
     override func viewDidAppear(_ animated: Bool) {
