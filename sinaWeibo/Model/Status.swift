@@ -14,6 +14,10 @@ class Status: NSObject {
     @objc var created_at: String?
     @objc var source: String?
     @objc var user: User?
+    /// 缩略图配图数组 key： thumbnail_pic
+    @objc var pic_urls: [[String : String]]?
+    /// 被转发的原微博信息字段
+    @objc var retweeted_status: Status?
     init(dict: [String : Any]) {
         super.init()
         setValuesForKeys(dict)
@@ -26,12 +30,19 @@ class Status: NSObject {
             }
             return
         }
+        if key == "retweeted_status" {
+            if let dict = value as? [String : Any] {
+                retweeted_status = Status(dict: dict)
+//                print(retweeted_status as Any)
+            }
+            return
+        }
         super.setValue(value, forKey: key)
     }
     override func setValue(_ value: Any?, forUndefinedKey key: String){}
     
     override var description: String {
-        let keys = ["id", "text", "created_at", "source", "user"]
+        let keys = ["id", "text", "created_at", "source", "user", "pic_urls", "retweeted_status"]
         return dictionaryWithValues(forKeys: keys).description
     }
 }

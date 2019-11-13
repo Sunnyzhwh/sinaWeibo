@@ -10,6 +10,14 @@ import UIKit
 /// 实现单条微博的业务逻辑
 class StatusViewModel {
     var status: Status
+    /// 缓存行高
+    lazy var rowHeight: CGFloat = {
+        
+//        print("计算行高_\(self.status.text ?? "-")")
+        let cell = StatusRetweetedCell(style: .default, reuseIdentifier: statusRetweetedCellId)
+        
+        return cell.rowHeight(vm: self)
+    }()
     var userProfileUrl: URL {
         return URL(string: status.user?.profile_image_url ?? "")!
     }
@@ -28,7 +36,16 @@ class StatusViewModel {
         default: return nil
         }
     }
+    var thumbnailUrls: [URL]?
     init(status: Status) {
         self.status = status
+        
+        if let urls = status.retweeted_status?.pic_urls ?? status.pic_urls {
+            thumbnailUrls = [URL]()
+            for dict in urls {
+                let url = URL(string: dict["thumbnail_pic"]!)
+                thumbnailUrls?.append(url!)
+            }
+        }
     }
 }

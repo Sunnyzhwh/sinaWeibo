@@ -8,8 +8,8 @@
 
 import UIKit
 import SVProgressHUD
-private let statusCellNormalId = "statusCellNormalId"
-
+let statusCellNormalId = "statusCellNormalId"
+let statusRetweetedCellId = "statusRetweetedCellId"
 class HomeTableViewController: VisitorTableViewController {
     private lazy var statusList = StatusListViewModel()
     override func viewDidLoad() {
@@ -29,17 +29,23 @@ class HomeTableViewController: VisitorTableViewController {
         return statusList.statusArray.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: statusCellNormalId, for: indexPath) as! StatusCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: statusRetweetedCellId, for: indexPath) as! StatusCell
         cell.viewModel = statusList.statusArray[indexPath.row]
         return cell
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        print("计算行高\(indexPath)")
+        let vm = statusList.statusArray[indexPath.row]
+
+        return vm.rowHeight
     }
 }
 extension HomeTableViewController {
     private func setTableView() {
-        tableView.register(StatusCell.self, forCellReuseIdentifier: statusCellNormalId)
+        tableView.register(StatusRetweetedCell.self, forCellReuseIdentifier: statusRetweetedCellId)
         ///使用自动计算行高，需要指定一个自上由下的约束
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
+
+        tableView.estimatedRowHeight = 400
         tableView.separatorStyle = .none
     }
     private func loadData() {

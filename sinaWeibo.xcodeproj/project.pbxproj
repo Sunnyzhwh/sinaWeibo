@@ -14,6 +14,7 @@
 		A32245B2237AB78D00787104 /* StatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32245B1237AB78D00787104 /* StatusCell.swift */; };
 		A32245B4237AB7DD00787104 /* StatusCellTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32245B3237AB7DD00787104 /* StatusCellTopView.swift */; };
 		A32245B6237AB7F200787104 /* StatusCellBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32245B5237AB7F200787104 /* StatusCellBottomView.swift */; };
+		A32245B8237B1F7B00787104 /* StatusPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32245B7237B1F7B00787104 /* StatusPicView.swift */; };
 		A32857FC23757975009E113E /* NetWorkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32857FB23757975009E113E /* NetWorkTools.swift */; };
 		A351360D2376A9A100ACEF3C /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351360C2376A9A100ACEF3C /* UserAccountViewModel.swift */; };
 		A351360F2376F2BA00ACEF3C /* NewfeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */; };
@@ -32,6 +33,7 @@
 		A3FD8BDA23701BD6007BA6C8 /* VisitorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD8BD923701BD6007BA6C8 /* VisitorTableViewController.swift */; };
 		A3FD8BDC23701FF2007BA6C8 /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD8BDB23701FF2007BA6C8 /* VisitorView.swift */; };
 		A3FD8BDE23706DD5007BA6C8 /* label+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD8BDD23706DD5007BA6C8 /* label+extension.swift */; };
+		A3FF934D237C0639006B4D3C /* StatusRetweetedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FF934C237C0639006B4D3C /* StatusRetweetedCell.swift */; };
 		C56A148236C9B9D0103D0E7B /* Pods_sinaWeibo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D873ED2211FFDB5598054791 /* Pods_sinaWeibo.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,7 @@
 		A32245B1237AB78D00787104 /* StatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCell.swift; sourceTree = "<group>"; };
 		A32245B3237AB7DD00787104 /* StatusCellTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellTopView.swift; sourceTree = "<group>"; };
 		A32245B5237AB7F200787104 /* StatusCellBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCellBottomView.swift; sourceTree = "<group>"; };
+		A32245B7237B1F7B00787104 /* StatusPicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPicView.swift; sourceTree = "<group>"; };
 		A32857FB23757975009E113E /* NetWorkTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkTools.swift; sourceTree = "<group>"; };
 		A351360C2376A9A100ACEF3C /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
 		A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewfeatureViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		A3FD8BD923701BD6007BA6C8 /* VisitorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorTableViewController.swift; sourceTree = "<group>"; };
 		A3FD8BDB23701FF2007BA6C8 /* VisitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
 		A3FD8BDD23706DD5007BA6C8 /* label+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "label+extension.swift"; sourceTree = "<group>"; };
+		A3FF934C237C0639006B4D3C /* StatusRetweetedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRetweetedCell.swift; sourceTree = "<group>"; };
 		D873ED2211FFDB5598054791 /* Pods_sinaWeibo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sinaWeibo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,8 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				A32245B1237AB78D00787104 /* StatusCell.swift */,
+				A3FF934C237C0639006B4D3C /* StatusRetweetedCell.swift */,
 				A32245B3237AB7DD00787104 /* StatusCellTopView.swift */,
 				A32245B5237AB7F200787104 /* StatusCellBottomView.swift */,
+				A32245B7237B1F7B00787104 /* StatusPicView.swift */,
 			);
 			path = StatusCell;
 			sourceTree = "<group>";
@@ -368,6 +374,7 @@
 				A351361323776A4000ACEF3C /* Common.swift in Sources */,
 				A32245AF237AB50500787104 /* StatusViewModel.swift in Sources */,
 				A32245AB237A890100787104 /* StatusListViewModel.swift in Sources */,
+				A3FF934D237C0639006B4D3C /* StatusRetweetedCell.swift in Sources */,
 				A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */,
 				A35136112377408500ACEF3C /* WelcomeViewController.swift in Sources */,
 				A32245B4237AB7DD00787104 /* StatusCellTopView.swift in Sources */,
@@ -375,6 +382,7 @@
 				A3FD8BD4236FF401007BA6C8 /* ProfileTableViewController.swift in Sources */,
 				A32245A9237A747600787104 /* Status.swift in Sources */,
 				A32245B6237AB7F200787104 /* StatusCellBottomView.swift in Sources */,
+				A32245B8237B1F7B00787104 /* StatusPicView.swift in Sources */,
 				A3FD8BCE236FF3D5007BA6C8 /* HomeTableViewController.swift in Sources */,
 				A32245AD237AACED00787104 /* User.swift in Sources */,
 				A3FD8BD823701077007BA6C8 /* UIbutton+Extension.swift in Sources */,
