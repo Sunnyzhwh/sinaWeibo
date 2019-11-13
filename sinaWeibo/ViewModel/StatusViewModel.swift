@@ -10,11 +10,19 @@ import UIKit
 /// 实现单条微博的业务逻辑
 class StatusViewModel {
     var status: Status
+    /// 表格的可重用标识符
+    var cellId: String {
+        return status.retweeted_status != nil ? statusRetweetedCellId : statusCellNormalId
+    }
     /// 缓存行高
     lazy var rowHeight: CGFloat = {
-        
+        var cell: StatusCell
 //        print("计算行高_\(self.status.text ?? "-")")
-        let cell = StatusRetweetedCell(style: .default, reuseIdentifier: statusRetweetedCellId)
+        if status.retweeted_status != nil {
+            cell = StatusRetweetedCell(style: .default, reuseIdentifier: statusRetweetedCellId)
+        }else {
+            cell = StatusNormalCell(style: .default, reuseIdentifier: statusCellNormalId)
+        }
         
         return cell.rowHeight(vm: self)
     }()
@@ -35,6 +43,13 @@ class StatusViewModel {
         case 0: return UIImage(named: "avatar_vip")
         default: return nil
         }
+    }
+    
+    var retweetedText: String? {
+        guard let s = status.retweeted_status else {
+            return nil
+        }
+        return "@" + (s.user?.screen_name)!  + ":" + s.text!
     }
     var thumbnailUrls: [URL]?
     init(status: Status) {

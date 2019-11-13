@@ -29,8 +29,9 @@ class HomeTableViewController: VisitorTableViewController {
         return statusList.statusArray.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: statusRetweetedCellId, for: indexPath) as! StatusCell
-        cell.viewModel = statusList.statusArray[indexPath.row]
+        let vm = statusList.statusArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: vm.cellId, for: indexPath) as! StatusCell
+        cell.viewModel = vm
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -43,6 +44,7 @@ class HomeTableViewController: VisitorTableViewController {
 extension HomeTableViewController {
     private func setTableView() {
         tableView.register(StatusRetweetedCell.self, forCellReuseIdentifier: statusRetweetedCellId)
+        tableView.register(StatusNormalCell.self, forCellReuseIdentifier: statusCellNormalId)
         ///使用自动计算行高，需要指定一个自上由下的约束
 
         tableView.estimatedRowHeight = 400

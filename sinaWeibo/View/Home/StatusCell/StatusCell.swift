@@ -18,8 +18,8 @@ class StatusCell: UITableViewCell {
             pictureView.snp.updateConstraints { (update) in
                 update.width.equalTo(pictureView.bounds.width)
                 update.height.equalTo(pictureView.bounds.height)
-                let offset = (viewModel?.status.pic_urls?.count)! > 0 ? statusCellMargin : 0
-                update.top.equalTo(contentLabel.snp.bottom).offset(offset)
+//                let offset = (viewModel?.status.pic_urls?.count)! > 0 ? statusCellMargin : 0
+//                update.top.equalTo(contentLabel.snp.bottom).offset(offset)
             }
 //            print(viewModel?.status as Any)
             bottomView.viewModel = viewModel
@@ -33,9 +33,9 @@ class StatusCell: UITableViewCell {
         return bottomView.frame.maxY
     }
     private lazy var topView: StatusCellTopView = StatusCellTopView()
-    private lazy var contentLabel = UILabel(title: "微博正文", fontSize: 15, color: UIColor.darkGray, screenInset: 1)
-    private lazy var pictureView = StatusPicView()
-    private lazy var bottomView: StatusCellBottomView = StatusCellBottomView()
+    lazy var contentLabel = UILabel(title: "微博正文", fontSize: 15, color: UIColor.darkGray, screenInset: 1)
+    lazy var pictureView = StatusPicView()
+    lazy var bottomView: StatusCellBottomView = StatusCellBottomView()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -46,10 +46,8 @@ class StatusCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-}
-extension StatusCell {
-    private func setupUI() {
+    // MARK: 子类继承父类方法，不能写在extension里面，想要子类继承的方法必须写在类声明中，子类继承方法也必须在类声明中！！！
+    func setupUI() {
         contentView.addSubview(topView)
         contentView.addSubview(contentLabel)
         contentView.addSubview(pictureView)
@@ -74,18 +72,13 @@ extension StatusCell {
             make.left.equalTo(contentView.snp.left).offset(statusCellMargin)
             make.top.equalTo(topView.snp.bottom).offset(statusCellMargin)
         }
-        pictureView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentLabel.snp.bottom)
-            make.left.equalTo(contentLabel.snp.left)
-            make.width.equalTo(300)
-            make.height.equalTo(90)
-        }
+        
         bottomView.snp.makeConstraints { (make) in
             make.top.equalTo(pictureView.snp.bottom).offset(statusCellMargin)
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
             make.height.equalTo(44)
-//            make.bottom.equalTo(contentView.snp.bottom)
+            //            make.bottom.equalTo(contentView.snp.bottom)
         }
     }
 }

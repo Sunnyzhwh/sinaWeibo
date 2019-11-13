@@ -27,7 +27,7 @@ class StatusPicView: UICollectionView {
         layout.minimumLineSpacing = StatusPicViewItemMargin
         layout.minimumInteritemSpacing = StatusPicViewItemMargin
         super.init(frame: .zero, collectionViewLayout: layout)
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor(white: 1, alpha: 0)
         dataSource = self
         register(StatusPicViewCell.self, forCellWithReuseIdentifier: StatusPicViewCellId)
     }
@@ -58,7 +58,7 @@ extension StatusPicView {
         let itemWidth = (maxWidth - 2 * StatusPicViewItemMargin) / rowCount
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        let count = ((viewModel?.status.retweeted_status) != nil) ? viewModel?.status.retweeted_status?.pic_urls?.count : viewModel?.status.pic_urls?.count
+        let count = viewModel?.thumbnailUrls?.count ?? 0
         if count == 0 {
             return CGSize.zero
         }
@@ -69,7 +69,7 @@ extension StatusPicView {
             let w = 2 * itemWidth + StatusPicViewItemMargin
             return CGSize(width: w, height: w)
         }else {
-            let row = CGFloat((count! - 1) / Int(rowCount) + 1)
+            let row = CGFloat((count - 1) / Int(rowCount) + 1)
             let h = row * itemWidth + (row - 1) * StatusPicViewItemMargin
             let w = rowCount * itemWidth + (rowCount - 1) * StatusPicViewItemMargin
             return CGSize(width: w, height: h)

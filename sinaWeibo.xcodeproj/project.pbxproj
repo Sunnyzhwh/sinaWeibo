@@ -20,6 +20,7 @@
 		A351360F2376F2BA00ACEF3C /* NewfeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */; };
 		A35136112377408500ACEF3C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35136102377408500ACEF3C /* WelcomeViewController.swift */; };
 		A351361323776A4000ACEF3C /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351361223776A4000ACEF3C /* Common.swift */; };
+		A3CB24C1237C90A10056BA85 /* StatusNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */; };
 		A3F619C7237598080096E1F4 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F619C6237598080096E1F4 /* OAuthViewController.swift */; };
 		A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F619C82375D7D10096E1F4 /* UserAccountModel.swift */; };
 		A3FD8BB1236FEAD8007BA6C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD8BB0236FEAD8007BA6C8 /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewfeatureViewController.swift; sourceTree = "<group>"; };
 		A35136102377408500ACEF3C /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A351361223776A4000ACEF3C /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNormalCell.swift; sourceTree = "<group>"; };
 		A3F619C6237598080096E1F4 /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		A3F619C82375D7D10096E1F4 /* UserAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountModel.swift; sourceTree = "<group>"; };
 		A3FD8BAD236FEAD8007BA6C8 /* sinaWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sinaWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 			children = (
 				A32245B1237AB78D00787104 /* StatusCell.swift */,
 				A3FF934C237C0639006B4D3C /* StatusRetweetedCell.swift */,
+				A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */,
 				A32245B3237AB7DD00787104 /* StatusCellTopView.swift */,
 				A32245B5237AB7F200787104 /* StatusCellBottomView.swift */,
 				A32245B7237B1F7B00787104 /* StatusPicView.swift */,
@@ -378,6 +381,7 @@
 				A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */,
 				A35136112377408500ACEF3C /* WelcomeViewController.swift in Sources */,
 				A32245B4237AB7DD00787104 /* StatusCellTopView.swift in Sources */,
+				A3CB24C1237C90A10056BA85 /* StatusNormalCell.swift in Sources */,
 				A351360F2376F2BA00ACEF3C /* NewfeatureViewController.swift in Sources */,
 				A3FD8BD4236FF401007BA6C8 /* ProfileTableViewController.swift in Sources */,
 				A32245A9237A747600787104 /* Status.swift in Sources */,
