@@ -62,25 +62,47 @@ extension StatusPicView {
         if count == 0 {
             return CGSize.zero
         }
-        else if count == 1 {
-            return CGSize(width: 150, height: 120)
+        if count == 1 {
+            var size = CGSize(width: 150, height: 120)
+            if let key = viewModel?.thumbnailUrls?.first?.absoluteString {
+                /// 从磁盘缓存中加载图片，key是图片URL的完整字符串，缓存图片的文件名默认是经过MD5处理，在option里面可以设置更改
+               KingfisherManager.shared.cache.retrieveImageInDiskCache(forKey: key) { (result) in
+                    switch result {
+                    case .success (let value):
+                        let image = value!
+                        size = image.size
+                    case .failure (let error):
+                        print("Job failed: \(error.localizedDescription)")
+                    }
+                }
+            }
+            /// 处理图片过窄情况
+            size.width = size.width < 40 ? 40 : size.width
+            /// 处理图片过宽情况
+            if size.width > 300 {
+                let w: CGFloat = 300
+                let h = size.height * w / size.width
+                size = CGSize(width: w, height: h)
+            }
+            layout.itemSize = size
+            return size
         }
-        else if count == 4 {
+        if count == 4 {
             let w = 2 * itemWidth + StatusPicViewItemMargin
             return CGSize(width: w, height: w)
-        }else {
-            let row = CGFloat((count - 1) / Int(rowCount) + 1)
-            let h = row * itemWidth + (row - 1) * StatusPicViewItemMargin
-            let w = rowCount * itemWidth + (rowCount - 1) * StatusPicViewItemMargin
-            return CGSize(width: w, height: h)
         }
+        let row = CGFloat((count - 1) / Int(rowCount) + 1)
+        let h = row * itemWidth + (row - 1) * StatusPicViewItemMargin
+        let w = rowCount * itemWidth + (rowCount - 1) * StatusPicViewItemMargin
+        return CGSize(width: w, height: h)
+        
     }
 }
 
 class StatusPicViewCell: UICollectionViewCell {
     var imgURL: URL? {
         didSet{
-            iconView.kf.setImage(with: imgURL, placeholder: nil, options: [.forceRefresh, .keepCurrentImageWhileLoading])
+            iconView.kf.setImage(with: imgURL, placeholder: nil, options: [.forceRefresh])
         }
     }
     override init(frame: CGRect) {

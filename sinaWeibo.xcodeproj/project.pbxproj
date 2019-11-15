@@ -20,6 +20,8 @@
 		A351360F2376F2BA00ACEF3C /* NewfeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */; };
 		A35136112377408500ACEF3C /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35136102377408500ACEF3C /* WelcomeViewController.swift */; };
 		A351361323776A4000ACEF3C /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A351361223776A4000ACEF3C /* Common.swift */; };
+		A35BE9D4237EE89200E232E1 /* WBRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35BE9D3237EE89200E232E1 /* WBRefreshControl.swift */; };
+		A35BE9D6237EE98C00E232E1 /* WBRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35BE9D5237EE98C00E232E1 /* WBRefreshView.xib */; };
 		A3CB24C1237C90A10056BA85 /* StatusNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */; };
 		A3F619C7237598080096E1F4 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F619C6237598080096E1F4 /* OAuthViewController.swift */; };
 		A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F619C82375D7D10096E1F4 /* UserAccountModel.swift */; };
@@ -54,6 +56,8 @@
 		A351360E2376F2BA00ACEF3C /* NewfeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewfeatureViewController.swift; sourceTree = "<group>"; };
 		A35136102377408500ACEF3C /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A351361223776A4000ACEF3C /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		A35BE9D3237EE89200E232E1 /* WBRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WBRefreshControl.swift; sourceTree = "<group>"; };
+		A35BE9D5237EE98C00E232E1 /* WBRefreshView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBRefreshView.xib; sourceTree = "<group>"; };
 		A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNormalCell.swift; sourceTree = "<group>"; };
 		A3F619C6237598080096E1F4 /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		A3F619C82375D7D10096E1F4 /* UserAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountModel.swift; sourceTree = "<group>"; };
@@ -105,6 +109,15 @@
 				A32245B7237B1F7B00787104 /* StatusPicView.swift */,
 			);
 			path = StatusCell;
+			sourceTree = "<group>";
+		};
+		A35BE9D0237EE7F700E232E1 /* RefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				A35BE9D3237EE89200E232E1 /* WBRefreshControl.swift */,
+				A35BE9D5237EE98C00E232E1 /* WBRefreshView.xib */,
+			);
+			path = RefreshView;
 			sourceTree = "<group>";
 		};
 		A3F619C5237597D70096E1F4 /* OAuth */ = {
@@ -191,6 +204,7 @@
 		A3FD8BC6236FF23E007BA6C8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A35BE9D0237EE7F700E232E1 /* RefreshView */,
 				A32245B0237AB76800787104 /* StatusCell */,
 				A3FD8BCD236FF3D5007BA6C8 /* HomeTableViewController.swift */,
 			);
@@ -321,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A35BE9D6237EE98C00E232E1 /* WBRefreshView.xib in Resources */,
 				A3FD8BB8236FEAD9007BA6C8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +391,7 @@
 			files = (
 				A351361323776A4000ACEF3C /* Common.swift in Sources */,
 				A32245AF237AB50500787104 /* StatusViewModel.swift in Sources */,
+				A35BE9D4237EE89200E232E1 /* WBRefreshControl.swift in Sources */,
 				A32245AB237A890100787104 /* StatusListViewModel.swift in Sources */,
 				A3FF934D237C0639006B4D3C /* StatusRetweetedCell.swift in Sources */,
 				A3F619C92375D7D10096E1F4 /* UserAccountModel.swift in Sources */,

@@ -49,9 +49,12 @@ extension HomeTableViewController {
 
         tableView.estimatedRowHeight = 400
         tableView.separatorStyle = .none
+        refreshControl = WBRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
     }
-    private func loadData() {
+    @objc private func loadData() {
         statusList.loadStatus { (isSuccessed) in
+            self.refreshControl?.endRefreshing()
             if isSuccessed {
                 self.tableView.reloadData()
             } else {
