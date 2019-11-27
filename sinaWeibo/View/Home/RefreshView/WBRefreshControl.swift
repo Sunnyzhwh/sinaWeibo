@@ -37,6 +37,7 @@ class WBRefreshControl: UIRefreshControl {
     private lazy var refreshView = WBRefreshView.refreshView()
     private func setupUI() {
         addSubview(refreshView)
+        bringSubviewToFront(refreshView)
         /// 自动布局 - 从NIB加载的控件需要制定大小约束
         refreshView.snp.makeConstraints { (make) in
 //            make.centerX.equalTo(self.snp.centerX)
@@ -55,6 +56,9 @@ class WBRefreshControl: UIRefreshControl {
     }
 }
 class WBRefreshView: UIView {
+    @IBOutlet weak var loadingView: UIImageView!
+    @IBOutlet weak var tipView: UIView!
+    @IBOutlet weak var tipIconView: UIImageView!
     class func refreshView() -> WBRefreshView {
         let nib = UINib(nibName: "WBRefreshView", bundle: nil)
         return nib.instantiate(withOwner: nil, options: nil).first as! WBRefreshView

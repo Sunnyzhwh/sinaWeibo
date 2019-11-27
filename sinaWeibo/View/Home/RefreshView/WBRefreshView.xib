@@ -22,7 +22,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="refreshbg" translatesAutoresizingMaskIntoConstraints="NO" id="dpR-Y7-6vW">
+                <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="tableview_loading" translatesAutoresizingMaskIntoConstraints="NO" id="dpR-Y7-6vW">
                     <rect key="frame" x="2" y="14" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask"/>
                 </imageView>
@@ -37,7 +37,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="tableview_pull_refresh" translatesAutoresizingMaskIntoConstraints="NO" id="9eL-nR-JQk">
+                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="tableview_pull_refresh" translatesAutoresizingMaskIntoConstraints="NO" id="9eL-nR-JQk">
                             <rect key="frame" x="2" y="14" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </imageView>
@@ -46,14 +46,19 @@
                     <viewLayoutGuide key="safeArea" id="Btn-UK-ftG"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="VKH-Bt-pEs"/>
+            <connections>
+                <outlet property="loadingView" destination="dpR-Y7-6vW" id="B2x-Bj-Lus"/>
+                <outlet property="tipIconView" destination="9eL-nR-JQk" id="w21-XU-Mbm"/>
+                <outlet property="tipView" destination="JCN-Zz-h80" id="Wf5-ar-Ilj"/>
+            </connections>
             <point key="canvasLocation" x="51" y="-739"/>
         </view>
     </objects>
     <resources>
-        <image name="refreshbg" width="320" height="438"/>
+        <image name="tableview_loading" width="32" height="32"/>
         <image name="tableview_pull_refresh" width="32" height="32"/>
     </resources>
 </document>

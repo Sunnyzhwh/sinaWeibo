@@ -27,10 +27,11 @@ class StatusListViewModel {
                 return
             }
             guard let dataArray = data["statuses"] as? [[String : Any]] else { return }
+            var datalist = [StatusViewModel]()
             for dict in dataArray {
-                self.statusArray.append(StatusViewModel(status: Status(dict: dict)))
+                datalist.append(StatusViewModel(status: Status(dict: dict)))
             }
-            
+            self.statusArray += datalist
             self.cacheSingleImage(dataList: self.statusArray, finished: finished)
         }
     }
