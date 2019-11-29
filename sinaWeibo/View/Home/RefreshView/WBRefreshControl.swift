@@ -9,20 +9,31 @@
 import UIKit
 private let WBRefreshControlOffset: CGFloat = -60
 class WBRefreshControl: UIRefreshControl {
+    override func beginRefreshing() {
+        super.beginRefreshing()
+        refreshView.beginAnimation()
+    }
+    override func endRefreshing() {
+        super.endRefreshing()
+        refreshView.endAnimation()
+    }
     // MARK: 监听方法KVO 箭头旋转标志
-    private var rotatoFlag = false
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if frame.origin.y > 0 {
             return
         }
-        if frame.origin.y < WBRefreshControlOffset, !rotatoFlag {
-            print("反过来")
-            rotatoFlag = true
-        }else if frame.origin.y >= WBRefreshControlOffset, rotatoFlag{
-            print("转过去")
-            rotatoFlag = false
+        if isRefreshing {
+            refreshView.beginAnimation()
+            return
         }
-        print(frame)
+        if frame.origin.y < WBRefreshControlOffset, !refreshView.rotateFlag {
+            print("反过来")
+            refreshView.rotateFlag = true
+        }else if frame.origin.y >= WBRefreshControlOffset, refreshView.rotateFlag{
+            print("转过去")
+            refreshView.rotateFlag = false
+        }
+//        print(frame)
     }
     override init() {
         super.init()
@@ -36,8 +47,8 @@ class WBRefreshControl: UIRefreshControl {
     }
     private lazy var refreshView = WBRefreshView.refreshView()
     private func setupUI() {
+        tintColor = UIColor.clear
         addSubview(refreshView)
-        bringSubviewToFront(refreshView)
         /// 自动布局 - 从NIB加载的控件需要制定大小约束
         refreshView.snp.makeConstraints { (make) in
 //            make.centerX.equalTo(self.snp.centerX)
@@ -59,8 +70,42 @@ class WBRefreshView: UIView {
     @IBOutlet weak var loadingView: UIImageView!
     @IBOutlet weak var tipView: UIView!
     @IBOutlet weak var tipIconView: UIImageView!
+    fileprivate var rotateFlag = false {
+        didSet{
+            rotatoTipIcon()
+        }
+    }
     class func refreshView() -> WBRefreshView {
         let nib = UINib(nibName: "WBRefreshView", bundle: nil)
         return nib.instantiate(withOwner: nil, options: nil).first as! WBRefreshView
+    }
+    fileprivate func rotatoTipIcon() {
+        if rotateFlag {
+            UIView.animate(withDuration: 0.25) {
+                self.tipIconView.transform = CGAffineTransform(rotationAngle: CGFloat.pi - 0.0000001)
+            }
+        }else {
+            UIView.animate(withDuration: 0.25) {
+                self.tipIconView.transform = CGAffineTransform.identity
+            }
+        }
+    }
+    fileprivate func beginAnimation() {
+        tipView.isHidden = true
+        let key = "transform.rotation"
+        if loadingView.layer.animation(forKey: key) != nil {
+            return
+        }
+        print("动画已经加载")
+        let animation = CABasicAnimation(keyPath: key)
+        animation.toValue = 2 * CGFloat.pi
+        animation.repeatCount = MAXFLOAT
+        animation.duration = 2
+        animation.isRemovedOnCompletion = false
+        loadingView.layer.add(animation, forKey: key)
+    }
+    fileprivate func endAnimation() {
+        tipView.isHidden = false
+        loadingView.layer.removeAllAnimations()
     }
 }

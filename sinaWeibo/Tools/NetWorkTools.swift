@@ -38,12 +38,20 @@ class NetWorkTools {
 // MARK: 加载微博相关数据
 extension NetWorkTools {
     /// 加载授权用户的最新微博
+    /// since_id     若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+    /// max_id       若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
     /// -see[https://open.weibo.com/wiki/2/statuses/home_timeline](https://open.weibo.com/wiki/2/statuses/home_timeline)
-    func fetchStatus(finished: @escaping (_ result: Any) -> ()) {
+    func fetchStatus(since_id: Int ,max_id: Int , finished: @escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/statuses/home_timeline.json"
-        guard let parameters = tokenDict else {
+        guard var parameters = tokenDict else {
             print("token无效")
             return
+        }
+        /// 判断是否为下拉刷新
+        if since_id > 0 {
+            parameters["since_id"] = since_id
+        }else if max_id > 0 { /// 判断上拉刷新
+            parameters["max_id"] = max_id - 1
         }
         requestData(url: url, amethod: .get, parameters: parameters, finished: finished)
     }

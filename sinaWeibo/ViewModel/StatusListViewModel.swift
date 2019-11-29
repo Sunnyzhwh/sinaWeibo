@@ -11,8 +11,12 @@ import Kingfisher
 /// 获取网络数据，字典转模型
 class StatusListViewModel {
     lazy var statusArray = [StatusViewModel]()
-    func loadStatus(finished: @escaping (_ isSuccessed: Bool) -> ()) {
-        NetWorkTools.sharedTools.fetchStatus { (result) in
+    func loadStatus(isPullup: Bool, finished: @escaping (_ isSuccessed: Bool) -> ()) {
+        /// 下拉刷新数组中第一条微博的ID
+        let sinceId = isPullup ? 0 : (statusArray.first?.status.id ?? 0)
+        /// 上拉刷新数组中最后一条微博的ID
+        let maxId = isPullup ? (statusArray.last?.status.id ?? 0) : 0
+        NetWorkTools.sharedTools.fetchStatus(since_id: sinceId, max_id: maxId) { (result) in
 //            if let data = result as? [String : Any] {
 //                if let array = data["statuses"] as? [[String : Any]] {
 //                    for dict in array {
@@ -31,7 +35,14 @@ class StatusListViewModel {
             for dict in dataArray {
                 datalist.append(StatusViewModel(status: Status(dict: dict)))
             }
-            self.statusArray += datalist
+            print("刷新到\(datalist.count)条微博")
+            /// 拼接微博数据
+            /// 判断是否上拉刷新
+            if maxId > 0 {
+                self.statusArray += datalist
+            }else {
+                self.statusArray = datalist + self.statusArray
+            }
             self.cacheSingleImage(dataList: self.statusArray, finished: finished)
         }
     }

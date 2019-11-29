@@ -12,6 +12,11 @@ let statusCellNormalId = "statusCellNormalId"
 let statusRetweetedCellId = "statusRetweetedCellId"
 class HomeTableViewController: VisitorTableViewController {
     private lazy var statusList = StatusListViewModel()
+    private lazy var pullupView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = UIColor.lightGray
+        return indicator
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         if !UserAccountViewModel.sharedUserAccount.userLogon {
@@ -32,6 +37,11 @@ class HomeTableViewController: VisitorTableViewController {
         let vm = statusList.statusArray[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: vm.cellId, for: indexPath) as! StatusCell
         cell.viewModel = vm
+        if indexPath.row == statusList.statusArray.count - 1, !pullupView.isAnimating {
+            pullupView.startAnimating()
+            loadData()
+            print("上拉刷新数据")
+        }
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -51,10 +61,14 @@ extension HomeTableViewController {
         tableView.separatorStyle = .none
         refreshControl = WBRefreshControl()
         refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        tableView.tableFooterView = pullupView
     }
+
     @objc private func loadData() {
-        statusList.loadStatus { (isSuccessed) in
+        refreshControl?.beginRefreshing()
+        statusList.loadStatus(isPullup: pullupView.isAnimating) { (isSuccessed) in
             self.refreshControl?.endRefreshing()
+            self.pullupView.stopAnimating()
             if isSuccessed {
                 self.tableView.reloadData()
             } else {
