@@ -20,5 +20,6 @@ extension UILabel {
             textAlignment = .left
             preferredMaxLayoutWidth = UIScreen.main.bounds.width - 2 * statusCellMargin
         }
+        sizeToFit()
     }
 }

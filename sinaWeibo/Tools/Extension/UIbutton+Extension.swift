@@ -10,12 +10,15 @@ import UIKit
 
 extension UIButton {
     /// 便利初始化
-    convenience init(imageName: String, backgroundImageName: String) {
+    convenience init(imageName: String, backgroundImageName: String?) {
         self.init()
         setImage(UIImage(named: imageName), for: .normal)
         setImage(UIImage(named: imageName + "_highlighted"), for: .highlighted)
-        setBackgroundImage(UIImage(named: backgroundImageName), for: .normal)
-        setBackgroundImage(UIImage(named: backgroundImageName + "_highlighted"), for: .highlighted)
+        if let backImageName = backgroundImageName {
+            setBackgroundImage(UIImage(named: backImageName), for: .normal)
+            setBackgroundImage(UIImage(named: backImageName + "_highlighted"), for: .highlighted)
+        }
+        
         // 根据背景图片设置大小
         sizeToFit()
     }

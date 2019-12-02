@@ -21,9 +21,10 @@ class HomeTableViewController: VisitorTableViewController {
         super.viewDidLoad()
         if !UserAccountViewModel.sharedUserAccount.userLogon {
             visitorView?.setInfo(imageName: nil, title: "关注一些人，回这里看看有什么消息")
+        }else {
+            setTableView()
+            loadData()
         }
-        setTableView()
-        loadData()
         
     }
     

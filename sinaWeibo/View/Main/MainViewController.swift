@@ -12,7 +12,13 @@ class MainViewController: UITabBarController {
     
     // MARK: 监听按钮点击
     @objc private func composedClicked() {
-        print("--")
+//        print("--")
+        // 判断用户是否登录
+        var vc = UIViewController()
+        let logon = UserAccountViewModel.sharedUserAccount.userLogon
+        vc = logon ? ComposeViewController() : OAuthViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
