@@ -52,7 +52,7 @@ extension NetWorkTools {
         let url = "https://api.weibo.com/2/users/show.json"
         var parameters = [String: Any]()
         parameters["uid"] = uid
-//        print(parameters)
+        print(parameters)
         tokenRequestData(url: url, amethod: .get, parameter: parameters, finished: finished)
     }
 }
@@ -88,8 +88,8 @@ extension NetWorkTools {
         if parameter != nil {
             parameter!.forEach { parameters[$0.key] = parameter![$0.key] }
         }
-        parameters = ["access_token" : token]
-        
+        parameters ["access_token"] = token
+        print(parameters)
         requestData(url: url, amethod: amethod, parameters: parameters, finished: finished)
     }
     // MARK: 获取网络请求
