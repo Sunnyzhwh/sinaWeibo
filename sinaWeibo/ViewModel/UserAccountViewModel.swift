@@ -58,7 +58,7 @@ extension UserAccountViewModel {
     }
     private func loadUserInfo(account: UserAccountModel, finished: @escaping () -> ()) {
         NetWorkTools.sharedTools.loadUserInfo(uid: account.uid!) { (result) in
-//            print(result)
+            print(result)
             if let dict = result as? [String : Any] {
                 account.screen_name = dict["screen_name"] as? String
                 account.avatar_large = dict["avatar_large"] as? String

@@ -20,7 +20,7 @@ class OAuthViewController: UIViewController {
     }
     
     @objc func autoFill() {
-        let js = "document.getElementById('userId').value = 'zhwh-001@163.com';" + "document.getElementById('passwd').value = 'zhwh001122';"
+        let js = "document.getElementById('userId').value = '13426208053';" + "document.getElementById('passwd').value = 'zhwh001122';"
         webView.evaluateJavaScript(js, completionHandler: nil)
     }
     override func loadView() {
@@ -47,7 +47,7 @@ extension OAuthViewController: WKNavigationDelegate {
             print(url)
             if let query = url.query, query.hasPrefix("code="){
                 // MARK: subString 替换成String（str【index...】） from    str[..<index] to str[range] range
-                let code = String(query["code=".endIndex...])
+                let code = query.replacingOccurrences(of: "code=", with: "")
                 print("用户授权")
                 print("授权码是\(code)")
                 UserAccountViewModel.sharedUserAccount.loadAccessToken(code: code) {

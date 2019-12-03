@@ -19,8 +19,8 @@ class UserAccountModel: NSObject, Codable {
     }
     var expiresDate: Date?
     @objc var uid: String?
-    var screen_name: String?
-    var avatar_large: String?
+    @objc var screen_name: String?
+    @objc var avatar_large: String?
     var plist: Data? {
         return try? PropertyListEncoder().encode(self)
     }

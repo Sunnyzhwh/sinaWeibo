@@ -9,6 +9,7 @@
 import UIKit
 
 extension UITextView {
+    
     /// 获取完整表情文字提交所需的字符串
     var submitContext: String {
         //        print(textView.attributedText!)
@@ -54,6 +55,8 @@ extension UITextView {
         }
         // 4.处理图片表情包
         insertEmoji(em: em)
+        // 5.通知代理文本变化了
+        delegate?.textViewDidChange?(self)
     }
     private func insertEmoji(em: Emoticon) {
 //        let attachment = EmoticonAttachment(emotion: em)

@@ -26,7 +26,7 @@
 
 #if !os(watchOS)
 
-#if canImport(AppKit) && !targetEnvironment(macabi)
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 public typealias IndicatorView = NSView
 #else

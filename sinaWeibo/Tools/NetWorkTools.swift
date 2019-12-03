@@ -16,13 +16,6 @@ class NetWorkTools {
     // MARK: 定义回调闭包
 //    typealias dataRequestCallBack = @escaping (_ result: Any) -> ()
     static let sharedTools = NetWorkTools()
-    
-    private var tokenDict: [String : Any]? {
-        if let token = UserAccountViewModel.sharedUserAccount.accessToken {
-            return ["access_token" : token]
-        }
-        return nil
-    }
     // MARK: 获取token
     func loadAccessToken(code: String, finished: @escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/oauth2/access_token"
@@ -43,30 +36,34 @@ extension NetWorkTools {
     /// -see[https://open.weibo.com/wiki/2/statuses/home_timeline](https://open.weibo.com/wiki/2/statuses/home_timeline)
     func fetchStatus(since_id: Int ,max_id: Int , finished: @escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/statuses/home_timeline.json"
-        guard var parameters = tokenDict else {
-            print("token无效")
-            return
-        }
+        var parameters = [String: Any]()
         /// 判断是否为下拉刷新
         if since_id > 0 {
             parameters["since_id"] = since_id
         }else if max_id > 0 { /// 判断上拉刷新
             parameters["max_id"] = max_id - 1
         }
-        requestData(url: url, amethod: .get, parameters: parameters, finished: finished)
+        tokenRequestData(url: url, amethod: .get, parameter: parameters, finished: finished)
     }
 }
 extension NetWorkTools {
     /// -see[https://open.weibo.com/wiki/2/users/show](https://open.weibo.com/wiki/2/users/show)
     func loadUserInfo(uid: String, finished: @escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/users/show.json"
-        guard var parameters = tokenDict else {
-            print("token无效")
-            return
-        }
+        var parameters = [String: Any]()
         parameters["uid"] = uid
-        print(parameters)
-        requestData(url: url, amethod: .get, parameters: parameters, finished: finished)
+//        print(parameters)
+        tokenRequestData(url: url, amethod: .get, parameter: parameters, finished: finished)
+    }
+}
+extension NetWorkTools {
+    /// 发布微博
+    /// -see[https://open.weibo.com/wiki/C/2/statuses/update/biz](https://open.weibo.com/wiki/C/2/statuses/update/biz)
+    func sendStatus(status: String, finished:@escaping (_ result: Any) -> ()) {
+        let url = "https://api.weibo.com/2/statuses/update.json"
+        var parameters = [String: Any]()
+        parameters["status"] = status
+        tokenRequestData(url: url, amethod: .post, parameter: parameters, finished: finished)
     }
 }
 
@@ -80,6 +77,21 @@ extension NetWorkTools {
 }
 
 extension NetWorkTools {
+    // MARK: 无需调用token字典获取网络请求
+    private func tokenRequestData(url: String, amethod: Alamofire.HTTPMethod, parameter: [String : Any]? = nil, finished: @escaping (_ result: Any) -> ()) {
+        guard let token = UserAccountViewModel.sharedUserAccount.accessToken else{
+            print("token无效")
+            return
+        }
+        // 追加token进参数字典
+        var parameters = [String : Any]()
+        if parameter != nil {
+            parameter!.forEach { parameters[$0.key] = parameter![$0.key] }
+        }
+        parameters = ["access_token" : token]
+        
+        requestData(url: url, amethod: amethod, parameters: parameters, finished: finished)
+    }
     // MARK: 获取网络请求
     private func requestData(url: String, amethod: Alamofire.HTTPMethod, parameters: [String : Any]? = nil, finished: @escaping (_ result: Any) -> ()) {
         Alamofire.request(url, method: amethod, parameters: parameters).responseJSON { (response) in
