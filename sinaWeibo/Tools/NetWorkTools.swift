@@ -88,7 +88,7 @@ extension NetWorkTools {
         if parameter != nil {
             parameter!.forEach { parameters[$0.key] = parameter![$0.key] }
         }
-        parameters = ["access_token" : token]
+        parameters["access_token"] = token
         
         requestData(url: url, amethod: amethod, parameters: parameters, finished: finished)
     }

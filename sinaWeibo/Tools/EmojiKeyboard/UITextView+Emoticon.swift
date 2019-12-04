@@ -51,6 +51,7 @@ extension UITextView {
         // 3. 处理emoji
         if let emoji = em.emoji {
             replace(selectedTextRange!, withText: emoji)
+            addRecentEmotion(em: em)
             return
         }
         // 4.处理图片表情包
@@ -75,7 +76,20 @@ extension UITextView {
         strM.replaceCharacters(in: selectedRangeM, with: imageText)
         attributedText = strM
         selectedRange = NSRange(location: selectedRangeM.location + 1, length: 0)
+        addRecentEmotion(em: em)
         return
+    }
+    private func addRecentEmotion(em: Emoticon){
+        let packages = EmoticonManager.shared.packages[0]
+        let unique = packages.emoticons.contains(em)
+        if unique {
+            let i = packages.emoticons.index(of: em)!
+            packages.emoticons.remove(at: i)
+            packages.emoticons.insert(em, at: 0)
+        }else{
+            packages.emoticons.remove(at: 19)
+            packages.emoticons.insert(em, at: 0)
+        }
     }
 
 }
