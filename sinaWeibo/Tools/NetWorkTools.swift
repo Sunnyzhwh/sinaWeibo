@@ -88,8 +88,8 @@ extension NetWorkTools {
         if parameter != nil {
             parameter!.forEach { parameters[$0.key] = parameter![$0.key] }
         }
-        parameters ["access_token"] = token
-        print(parameters)
+        parameters["access_token"] = token
+        
         requestData(url: url, amethod: amethod, parameters: parameters, finished: finished)
     }
     // MARK: 获取网络请求

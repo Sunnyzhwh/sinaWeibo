@@ -86,6 +86,7 @@ class ComposeViewController: UIViewController {
     }
     // 注销键盘变化通知
     deinit {
+        print("deinit")
         NotificationCenter.default.removeObserver(self)
     }
     override func viewDidAppear(_ animated: Bool) {
