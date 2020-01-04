@@ -8,7 +8,7 @@
 
 import UIKit
 let WBSwitchRootViewControllerNotification = Notification.Name.WBSwitchRootViewControllerNotifier
-let WBApprearanceTintColor = UIColor.orange
+let WBApprearanceTintColor = UIColor.cyan
 let nheight:CGFloat = 216
 let cheight:CGFloat = 282
 extension Notification.Name {

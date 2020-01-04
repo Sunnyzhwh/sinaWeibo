@@ -28,6 +28,7 @@ class ComposeViewController: UIViewController {
     }
     @objc private func choose_picture() {
         print("picture")
+        present(PicturePickerController(), animated: true)
     }
     @objc private func choose_mention() {
         print("mention")
@@ -51,9 +52,9 @@ class ComposeViewController: UIViewController {
     @objc private func keyboardChanged(n:Notification){
 //        print(n)
         let rect = (n.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        print(rect)
+//        print(rect)
         let duration = (n.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
-        print(duration)
+//        print(duration)
         let curve = (n.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue
         var offset:CGFloat = 0
         if rect.origin.y != UIScreen.main.bounds.height, bottomSafe > 0 {
