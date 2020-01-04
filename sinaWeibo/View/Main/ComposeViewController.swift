@@ -9,6 +9,7 @@
 import UIKit
 /// 发布微博页面
 class ComposeViewController: UIViewController {
+    private lazy var picturePickerController = PicturePickerController()
     // MARK: 监听点击事件
     @objc private func close() {
         textView.resignFirstResponder()
@@ -17,8 +18,9 @@ class ComposeViewController: UIViewController {
     @objc private func send() {
         
         let text = textView.submitContext
+        let image = picturePickerController.pictures.last
         print("send\(text)")
-        NetWorkTools.sharedTools.sendStatus(status: text) { (result) in
+        NetWorkTools.sharedTools.sendStatus(status: text,img: image) { (result) in
             print(result)
         }
         dismiss(animated: true, completion: nil)
@@ -28,7 +30,23 @@ class ComposeViewController: UIViewController {
     }
     @objc private func choose_picture() {
         print("picture")
-        present(PicturePickerController(), animated: true)
+        textView.resignFirstResponder()
+        if picturePickerController.view.frame.height > 0 {
+            return
+        }
+        picturePickerController.view.snp.updateConstraints{
+            $0.height.equalTo(view.bounds.height * 0.6)
+        }
+        // 修改文本视图约束 重建约束会将之前的所有约束删除
+        textView.snp.remakeConstraints{
+            $0.left.equalTo(view.snp.left)
+            $0.right.equalTo(view.snp.right)
+            $0.top.equalTo(view.snp.topMargin)
+            $0.bottom.equalTo(picturePickerController.view.snp.top)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
     }
     @objc private func choose_mention() {
         print("mention")
@@ -92,7 +110,9 @@ class ComposeViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        textView.becomeFirstResponder()
+        if picturePickerController.view.frame.height == 0 {
+            textView.becomeFirstResponder()
+        }
     }
     // MARK: 初始化自定义表情包
     var bottomSafe: CGFloat {
@@ -135,6 +155,17 @@ private extension ComposeViewController {
         prepareNav()
         prepareToolbar()
         prepareTextView()
+        preparePicture()
+    }
+    func preparePicture() {
+        addChild(picturePickerController)
+        view.insertSubview(picturePickerController.view, belowSubview: toolbar)
+        picturePickerController.view.snp.makeConstraints {
+            $0.bottom.equalTo(view.snp.bottom)
+            $0.left.equalTo(view.snp.left)
+            $0.right.equalTo(view.snp.right)
+            $0.height.equalTo(0)
+        }
     }
     func prepareNav() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(close))

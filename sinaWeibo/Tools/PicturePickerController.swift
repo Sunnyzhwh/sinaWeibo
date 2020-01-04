@@ -9,7 +9,7 @@
 import UIKit
 
 private let PicturePickerID = "PicturePickerCellID"
-private let PicturePickerMaxCount = 8
+private let PicturePickerMaxCount = 4
 
 class PicturePickerController: UICollectionViewController, PicturePickerCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -89,7 +89,9 @@ class PicturePickerController: UICollectionViewController, PicturePickerCellDele
         let indexPath = collectionView.indexPath(for: cell)!
         if indexPath.item >= pictures.count {return}
         pictures.remove(at: indexPath.item)
-        collectionView.deleteItems(at: [indexPath])
+        collectionView.reloadData()
+        //TODO: 后续处理越界问题
+//        collectionView.deleteItems(at: [indexPath])
     }
     /// 一旦实现代理方法，必须自己dismiss
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

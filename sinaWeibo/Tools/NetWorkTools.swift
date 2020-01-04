@@ -59,10 +59,12 @@ extension NetWorkTools {
 extension NetWorkTools {
     /// 发布微博
     /// -see[https://open.weibo.com/wiki/C/2/statuses/update/biz](https://open.weibo.com/wiki/C/2/statuses/update/biz)
-    func sendStatus(status: String, finished:@escaping (_ result: Any) -> ()) {
+    func sendStatus(status: String,img: UIImage? = nil, finished:@escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/statuses/update.json"
         var parameters = [String: Any]()
         parameters["status"] = status
+        let imageData = img?.jpegData(compressionQuality: 0.8)
+        parameters["pic"] = imageData
         tokenRequestData(url: url, amethod: .post, parameter: parameters, finished: finished)
     }
 }
