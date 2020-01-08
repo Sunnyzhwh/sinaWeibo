@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         print(UserAccountViewModel.sharedUserAccount)
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = UIColor.white
+        window?.backgroundColor = UIColor.black
         window?.rootViewController = defaultRootViewController
         window?.makeKeyAndVisible()
 //        print(isNewVersion)

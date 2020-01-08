@@ -31,6 +31,8 @@
 		A3569BD323959C86008EB6CE /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3569BC923959C86008EB6CE /* EmoticonPackage.swift */; };
 		A3569BD423959C86008EB6CE /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3569BCA23959C86008EB6CE /* String+Emoji.swift */; };
 		A3569BD623959C86008EB6CE /* UITextView+Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3569BCC23959C86008EB6CE /* UITextView+Emoticon.swift */; };
+		A359354623C0765B0033693F /* PicturePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A359354523C0765B0033693F /* PicturePickerController.swift */; };
+		A359354823C09D430033693F /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A359354723C09D430033693F /* UIImage+Extension.swift */; };
 		A35BE9D4237EE89200E232E1 /* WBRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35BE9D3237EE89200E232E1 /* WBRefreshControl.swift */; };
 		A35BE9D6237EE98C00E232E1 /* WBRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35BE9D5237EE98C00E232E1 /* WBRefreshView.xib */; };
 		A3CB24C1237C90A10056BA85 /* StatusNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */; };
@@ -78,6 +80,8 @@
 		A3569BC923959C86008EB6CE /* EmoticonPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
 		A3569BCA23959C86008EB6CE /* String+Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		A3569BCC23959C86008EB6CE /* UITextView+Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Emoticon.swift"; sourceTree = "<group>"; };
+		A359354523C0765B0033693F /* PicturePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturePickerController.swift; sourceTree = "<group>"; };
+		A359354723C09D430033693F /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A35BE9D3237EE89200E232E1 /* WBRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WBRefreshControl.swift; sourceTree = "<group>"; };
 		A35BE9D5237EE98C00E232E1 /* WBRefreshView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBRefreshView.xib; sourceTree = "<group>"; };
 		A3CB24C0237C90A10056BA85 /* StatusNormalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusNormalCell.swift; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 				A3569BC123959C86008EB6CE /* EmojiKeyboard */,
 				A3FD8BD623701017007BA6C8 /* Extension */,
 				A32857FB23757975009E113E /* NetWorkTools.swift */,
+				A359354523C0765B0033693F /* PicturePickerController.swift */,
 				A351361223776A4000ACEF3C /* Common.swift */,
 			);
 			path = Tools;
@@ -311,6 +316,7 @@
 				A3FD8BD723701077007BA6C8 /* UIbutton+Extension.swift */,
 				A3FD8BDD23706DD5007BA6C8 /* label+extension.swift */,
 				A3569BBF23957B8F008EB6CE /* UIBarButtonItem+Extension.swift */,
+				A359354723C09D430033693F /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -462,9 +468,11 @@
 				A32245B8237B1F7B00787104 /* StatusPicView.swift in Sources */,
 				A3FD8BCE236FF3D5007BA6C8 /* HomeTableViewController.swift in Sources */,
 				A32245AD237AACED00787104 /* User.swift in Sources */,
+				A359354623C0765B0033693F /* PicturePickerController.swift in Sources */,
 				A3FD8BD823701077007BA6C8 /* UIbutton+Extension.swift in Sources */,
 				A3FD8BB1236FEAD8007BA6C8 /* AppDelegate.swift in Sources */,
 				A3F619C7237598080096E1F4 /* OAuthViewController.swift in Sources */,
+				A359354823C09D430033693F /* UIImage+Extension.swift in Sources */,
 				A3FD8BDE23706DD5007BA6C8 /* label+extension.swift in Sources */,
 				A351360D2376A9A100ACEF3C /* UserAccountViewModel.swift in Sources */,
 				A3569BC023957B8F008EB6CE /* UIBarButtonItem+Extension.swift in Sources */,

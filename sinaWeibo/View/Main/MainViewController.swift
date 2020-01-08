@@ -27,6 +27,8 @@ class MainViewController: UITabBarController {
         // Do any additional setup after loading the view.
         addChildren()
         setupComposedButton()
+        tabBar.backgroundColor = UIColor.black
+        tabBar.barStyle = .black
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,9 +64,13 @@ extension MainViewController {
         
         // 设置标题，由内至外 （view -》 Navigation -》 TabBar）
         vc.title = title
+        vc.view.backgroundColor = UIColor.black
         vc.tabBarItem.image = UIImage(named: imageName)
         let nav = UINavigationController(rootViewController: vc)
-//        nav.tabBarItem.title = title
+        nav.navigationBar.barStyle = .black
+        nav.navigationBar.isTranslucent = false
+        let dict = [NSAttributedString.Key.foregroundColor : UIColor.cyan]
+        nav.navigationBar.titleTextAttributes = dict
         addChild(nav)
     }
 }
