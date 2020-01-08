@@ -36,24 +36,24 @@ extension NetWorkTools {
     /// -see[https://open.weibo.com/wiki/2/statuses/home_timeline](https://open.weibo.com/wiki/2/statuses/home_timeline)
     func fetchStatus(since_id: Int ,max_id: Int , finished: @escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/statuses/home_timeline.json"
-        var parameters = [String: Any]()
+        var parameters: [String: Any]? = [String : Any]()
         /// 判断是否为下拉刷新
         if since_id > 0 {
-            parameters["since_id"] = since_id
+            parameters!["since_id"] = since_id
         }else if max_id > 0 { /// 判断上拉刷新
-            parameters["max_id"] = max_id - 1
+            parameters!["max_id"] = max_id - 1
         }
-        tokenRequestData(url: url, amethod: .get, parameter: parameters, finished: finished)
+        tokenRequestData(url: url, amethod: .get, parameters: &parameters, finished: finished)
     }
 }
 extension NetWorkTools {
     /// -see[https://open.weibo.com/wiki/2/users/show](https://open.weibo.com/wiki/2/users/show)
     func loadUserInfo(uid: String, finished: @escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/users/show.json"
-        var parameters = [String: Any]()
-        parameters["uid"] = uid
-        print(parameters)
-        tokenRequestData(url: url, amethod: .get, parameter: parameters, finished: finished)
+        var parameters: [String: Any]? = [String : Any]()
+        parameters!["uid"] = uid
+//        print(parameters)
+        tokenRequestData(url: url, amethod: .get, parameters: &parameters, finished: finished)
     }
 }
 extension NetWorkTools {
@@ -61,11 +61,11 @@ extension NetWorkTools {
     /// -see[https://open.weibo.com/wiki/C/2/statuses/update/biz](https://open.weibo.com/wiki/C/2/statuses/update/biz)
     func sendStatus(status: String,img: UIImage? = nil, finished:@escaping (_ result: Any) -> ()) {
         let url = "https://api.weibo.com/2/statuses/update.json"
-        var parameters = [String: Any]()
-        parameters["status"] = status
+        var parameters: [String: Any]? = [String : Any]()
+        parameters!["status"] = status
         let imageData = img?.jpegData(compressionQuality: 0.8)
-        parameters["pic"] = imageData
-        tokenRequestData(url: url, amethod: .post, parameter: parameters, finished: finished)
+        parameters!["pic"] = imageData
+        tokenRequestData(url: url, amethod: .post, parameters: &parameters, finished: finished)
     }
 }
 
@@ -80,22 +80,21 @@ extension NetWorkTools {
 
 extension NetWorkTools {
     // MARK: 无需调用token字典获取网络请求
-    private func tokenRequestData(url: String, amethod: Alamofire.HTTPMethod, parameter: [String : Any]? = nil, finished: @escaping (_ result: Any) -> ()) {
+    private func tokenRequestData(url: String, amethod: Alamofire.HTTPMethod, parameters: inout [String : Any]? , finished: @escaping (_ result: Any) -> ()) {
         guard let token = UserAccountViewModel.sharedUserAccount.accessToken else{
             print("token无效")
             return
         }
         // 追加token进参数字典
-        var parameters = [String : Any]()
-        if parameter != nil {
-            parameter!.forEach { parameters[$0.key] = parameter![$0.key] }
+        if parameters == nil {
+            parameters = [String : Any]()
         }
-        parameters["access_token"] = token
+        parameters!["access_token"] = token
         
         requestData(url: url, amethod: amethod, parameters: parameters, finished: finished)
     }
     // MARK: 获取网络请求
-    private func requestData(url: String, amethod: Alamofire.HTTPMethod, parameters: [String : Any]? = nil, finished: @escaping (_ result: Any) -> ()) {
+    private func requestData(url: String, amethod: Alamofire.HTTPMethod, parameters: [String : Any]? , finished: @escaping (_ result: Any) -> ()) {
         Alamofire.request(url, method: amethod, parameters: parameters).responseJSON { (response) in
             guard let result = response.result.value else {
                 print(response.result.error ?? "---")
