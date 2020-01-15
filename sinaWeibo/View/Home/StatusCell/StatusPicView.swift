@@ -29,6 +29,7 @@ class StatusPicView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: layout)
         backgroundColor = UIColor(white: 1, alpha: 0)
         dataSource = self
+        delegate = self
         register(StatusPicViewCell.self, forCellWithReuseIdentifier: StatusPicViewCellId)
     }
     
@@ -37,7 +38,7 @@ class StatusPicView: UICollectionView {
     }
     
 }
-extension StatusPicView: UICollectionViewDataSource {
+extension StatusPicView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel?.thumbnailUrls?.count ?? 0
     }
@@ -47,7 +48,10 @@ extension StatusPicView: UICollectionViewDataSource {
         cell.imgURL = viewModel?.thumbnailUrls![indexPath.item]
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let userInfoDict = ["selectedIndexPath" : indexPath, "picURL" : viewModel!.thumbnailUrls!] as [String : Any]
+        NotificationCenter.default.post(name: WBStatusSelectedPhotoNotification, object: self, userInfo: userInfoDict)
+    }
 
 }
 // 计算视图大小

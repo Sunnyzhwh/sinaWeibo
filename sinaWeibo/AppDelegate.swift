@@ -20,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.black
         window?.rootViewController = defaultRootViewController
+        // 测试通知中心deinit
+//        let vc = UIViewController()
+//        let nav = UINavigationController(rootViewController: vc)
+//        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "test", style: .plain, target: self, action: #selector(click))
+//        window?.rootViewController = nav
         window?.makeKeyAndVisible()
 //        print(isNewVersion)
         // MARK: 监听通知 需要扩展notification.name为自定义通知名
@@ -35,6 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+//    @objc func click() {
+//        print("test")
+//        let vc = window?.rootViewController as? UINavigationController
+//        vc?.pushViewController(HomeTableViewController(), animated: true)
+//    }
     // MARK: 注销通知
     deinit {
         NotificationCenter.default.removeObserver(self, name: WBSwitchRootViewControllerNotification, object: nil)

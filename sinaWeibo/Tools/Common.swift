@@ -7,10 +7,8 @@
 //
 
 import UIKit
-let WBSwitchRootViewControllerNotification = Notification.Name.WBSwitchRootViewControllerNotifier
+let WBSwitchRootViewControllerNotification = Notification.Name.init(rawValue: "WBSwitchRootViewControllerNotification")
+let WBStatusSelectedPhotoNotification = Notification.Name.init(rawValue: "WBStatusSelectedPhotoNotification")
 let WBApprearanceTintColor = UIColor.cyan
 let nheight:CGFloat = 216
 let cheight:CGFloat = 282
-extension Notification.Name {
-    static let WBSwitchRootViewControllerNotifier = Notification.Name(rawValue: "WBSwitchRootViewControllerNotification")
-}

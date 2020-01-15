@@ -21,11 +21,24 @@ class HomeTableViewController: VisitorTableViewController {
         super.viewDidLoad()
         if !UserAccountViewModel.sharedUserAccount.userLogon {
             visitorView?.setInfo(imageName: nil, title: "关注一些人，回这里看看有什么消息")
-        }else {
-            setTableView()
-            loadData()
+            return
+        }
+        setTableView()
+        loadData()
+        // 注册点击图片通知
+        NotificationCenter.default.addObserver(forName: WBStatusSelectedPhotoNotification, object: nil, queue: nil) { (notify) in
+            guard let indexPath = notify.userInfo?["selectedIndexPath"] as? IndexPath else {
+                return
+            }
+            guard let urls = notify.userInfo?["picURL"] as? [URL] else { return }
+            let vc = PhotoBrowserViewController(currentIndexPath: indexPath, urls: urls)
+            self.present(vc, animated: true, completion: nil)
         }
         
+    }
+    deinit {
+        // 注销通知
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
